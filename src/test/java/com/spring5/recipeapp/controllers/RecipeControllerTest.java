@@ -61,13 +61,6 @@ public class RecipeControllerTest {
     }
 
     @Test
-    public void getRecipe_Throws_NumberFormatException_when_id_is_not_a_number() throws Exception {
-        mockMvc.perform(get("/recipe/asd/show"))
-                .andExpect(status().isBadRequest())
-                .andExpect(view().name("400error"));
-    }
-
-    @Test
     public void when_a_get_request_to_new_then_controller_should_return_form() throws Exception {
         RecipeCommand command = new RecipeCommand();
 

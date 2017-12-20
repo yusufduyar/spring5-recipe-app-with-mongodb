@@ -46,23 +46,26 @@ public class IngredientServiceTest {
         recipe.setId("1");
 
         Ingredient ingredient1 = new Ingredient();
-        ingredient1.setId("2");
+        ingredient1.setId("1");
 
         Ingredient ingredient2 = new Ingredient();
-        ingredient2.setId("3");
+        ingredient2.setId("1");
+
+        Ingredient ingredient3 = new Ingredient();
+        ingredient3.setId("3");
 
         recipe.addIngredient(ingredient1);
         recipe.addIngredient(ingredient2);
-
+        recipe.addIngredient(ingredient3);
         Optional<Recipe> recipeOptional = Optional.of(recipe);
+
         when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
 
-        //when
-        IngredientCommand ingredientCommand = ingredientService.findByRecipeIdAndIngredientId("1", "2");
-
         //then
-        assertEquals(Long.valueOf(2L), ingredientCommand.getId());
-        assertEquals(Long.valueOf(1L), ingredientCommand.getRecipeId());
+        IngredientCommand ingredientCommand = ingredientService.findByRecipeIdAndIngredientId("1", "3");
+
+        //when
+        assertEquals("3", ingredientCommand.getId());
         verify(recipeRepository, times(1)).findById(anyString());
     }
 
@@ -85,7 +88,7 @@ public class IngredientServiceTest {
         IngredientCommand savedIngredientCommand = ingredientService.saveIngredientCommand(ingredientCommand);
 
         //then
-        assertEquals(Long.valueOf(1L), savedIngredientCommand.getId());
+        assertEquals("1", savedIngredientCommand.getId());
         verify(recipeRepository, times(1)).findById(anyString());
         verify(recipeRepository, times(1)).save(any());
     }

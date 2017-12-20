@@ -139,3 +139,10 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+.mvn/
+mvnw
+mvnw.cmd
+out/
+pom.xml
+settings.gradle

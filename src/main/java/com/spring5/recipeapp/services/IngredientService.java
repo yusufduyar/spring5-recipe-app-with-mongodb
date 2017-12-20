@@ -37,19 +37,19 @@ public class IngredientService implements IIngredientService {
     @Override
     public IngredientCommand findByRecipeIdAndIngredientId(String recipeId, String ingredientId) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
-        if (!recipeOptional.isPresent()) {
-            log.error("Recipe not found with id: " + recipeId);
+
+        if (!recipeOptional.isPresent()){
+            log.error("recipe id not found. Id: " + recipeId);
         }
 
         Recipe recipe = recipeOptional.get();
-        Set<Ingredient> ingredients = recipe.getIngredients();
 
         Optional<IngredientCommand> ingredientCommandOptional = recipe.getIngredients().stream()
                 .filter(ingredient -> ingredient.getId().equals(ingredientId))
-                .map(ingredient -> ingredientToIngredientCommand.convert(ingredient)).findFirst();
+                .map( ingredient -> ingredientToIngredientCommand.convert(ingredient)).findFirst();
 
-        if (!ingredientCommandOptional.isPresent()) {
-            log.error("Ingredient not found with Id:" + ingredientId);
+        if(!ingredientCommandOptional.isPresent()){
+            log.error("Ingredient id not found: " + ingredientId);
         }
 
         return ingredientCommandOptional.get();
