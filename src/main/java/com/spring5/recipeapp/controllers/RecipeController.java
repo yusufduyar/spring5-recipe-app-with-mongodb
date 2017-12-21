@@ -59,7 +59,6 @@ public class RecipeController {
         recipeService.deleteById(id);
         return "redirect:/";
     }
-
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception){
